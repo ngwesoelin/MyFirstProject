@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <link href="Content/bootstrap.css" rel="stylesheet">
+    <script src="Scripts/jquery-1.9.1.js"></script>
+
+</head>
+<body>
+    
+    <input id="txtCustomerID_customer" name type="text" onchange="onChange_txtCustomerID()" class="cls_txtCustomerID"/>
+
+
+    <script>
+        function onChange_txtCustomerID() {
+            //var var_txtCustomerID = $(".cls_txtCustomerID").val();
+            //var var_txtCustomerID = $("#txtCustomerID_customer").val();
+            var var_txtCustomerID = document.getElementById("txtCustomerID_customer").value;
+            alert(var_txtCustomerID);
+        }
+
+        $.ajax({
+            url: "http://localhost:51841/api/Customer/GetTable",
+            type: "GET",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            cache: false,
+            success: function (response) {
+                if (response.length > 0) {
+                    var json_data = JSON.stringify(response);
+                    alert(json_data);
+
+                    $(".cls_txtCustomerID").val(response[0].Name);
+                }
+            },
+            error: function (x, e) {
+
+            }
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+    
+    <script src="Scripts/bootstrap.min.js"></script>
+  
+
+</body>
+</html>
